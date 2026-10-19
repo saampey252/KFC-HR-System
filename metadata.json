@@ -1,0 +1,6 @@
+{
+  "name": "KFC HR - Kooddoo Fisheries Complex HRMS",
+  "description": "Modern HR Employment Management System for Kooddoo Fisheries Complex (KFC), Maldives.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

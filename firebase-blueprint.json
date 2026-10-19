@@ -1,0 +1,159 @@
+{
+  "entities": {
+    "Employee": {
+      "title": "Employee",
+      "description": "Employee profile and employment record for Kooddoo Fisheries Complex",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "fullName": { "type": "string" },
+        "passportNumber": { "type": "string" },
+        "nationality": { "type": "string" },
+        "departmentId": { "type": "string" },
+        "departmentName": { "type": "string" },
+        "jobTitle": { "type": "string" },
+        "joiningDate": { "type": "string" },
+        "employmentStatus": { "type": "string" },
+        "workPermitNumber": { "type": "string" },
+        "workPermitExpiry": { "type": "string" },
+        "visaExpiry": { "type": "string" },
+        "passportExpiry": { "type": "string" },
+        "medicalExpiry": { "type": "string" },
+        "contractExpiry": { "type": "string" },
+        "gender": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "islandOrCamp": { "type": "string" },
+        "emergencyContact": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["employeeId", "fullName", "departmentName", "jobTitle", "joiningDate", "employmentStatus"]
+    },
+    "Department": {
+      "title": "Department",
+      "description": "Operational department at Kooddoo Fisheries Complex",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "headOfDepartment": { "type": "string" },
+        "employeeCount": { "type": "number" },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "code"]
+    },
+    "JobPosition": {
+      "title": "JobPosition",
+      "description": "Job designation role at KFC",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "departmentId": { "type": "string" },
+        "level": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["title", "departmentId"]
+    },
+    "LeaveRecord": {
+      "title": "LeaveRecord",
+      "description": "Leave and attendance entry for employee",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "employeeName": { "type": "string" },
+        "type": { "type": "string" },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "days": { "type": "number" },
+        "status": { "type": "string" },
+        "reason": { "type": "string" },
+        "approvedBy": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["employeeId", "type", "startDate", "endDate", "status"]
+    },
+    "HrDocument": {
+      "title": "HrDocument",
+      "description": "HR compliance or employee document metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "employeeName": { "type": "string" },
+        "docUrl": { "type": "string" },
+        "fileName": { "type": "string" },
+        "fileSize": { "type": "string" },
+        "uploadedAt": { "type": "string" },
+        "expiryDate": { "type": "string" }
+      },
+      "required": ["title", "category", "uploadedAt"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "System audit log for HR actions and compliance changes",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "action": { "type": "string" },
+        "actorEmail": { "type": "string" },
+        "actorName": { "type": "string" },
+        "details": { "type": "string" },
+        "targetId": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["action", "actorEmail", "timestamp"]
+    },
+    "HrSetting": {
+      "title": "HrSetting",
+      "description": "System configuration and HR settings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "companyName": { "type": "string" },
+        "location": { "type": "string" },
+        "expiryThresholdDays": { "type": "number" },
+        "authorizedHrEmails": { "type": "string" }
+      },
+      "required": ["companyName"]
+    }
+  },
+  "firestore": {
+    "/employees/{employeeId}": {
+      "schema": { "$ref": "#/entities/Employee" },
+      "description": "Collection of KFC employees"
+    },
+    "/departments/{departmentId}": {
+      "schema": { "$ref": "#/entities/Department" },
+      "description": "Collection of KFC operational departments"
+    },
+    "/job_positions/{positionId}": {
+      "schema": { "$ref": "#/entities/JobPosition" },
+      "description": "Collection of job titles and hierarchy"
+    },
+    "/leaves/{leaveId}": {
+      "schema": { "$ref": "#/entities/LeaveRecord" },
+      "description": "Attendance and leave applications"
+    },
+    "/hr_documents/{docId}": {
+      "schema": { "$ref": "#/entities/HrDocument" },
+      "description": "Compliance records, permits, and policies"
+    },
+    "/audit_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLog" },
+      "description": "Audit trails of employment modifications"
+    },
+    "/hr_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/HrSetting" },
+      "description": "Organization preferences and security configs"
+    }
+  }
+}
